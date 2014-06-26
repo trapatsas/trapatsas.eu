@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mobile Fuel Cost DB</title>
+    <link rel="stylesheet" href="stylesheets/themes/my-custom-theme.css" />
+    <link rel="stylesheet" href="stylesheets/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css">
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+
+    <!-- Favicons
+	================================================== -->
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+</head>
+<body>
+    <div data-role="page" data-theme="b">
+        <div data-role="content" data-theme="a">
+            <div data-role="header">
+                <h1>Fuel Cost DB</h1>
+            </div>
+            <!-- /header -->
+            <form id="formMain" action="fuelcost" method="post">
+                <div id="dateContainer" data-role="fieldcontain">
+                    <label for="dateField">Refuel date:</label>
+                    <input type="date" name="dateField" id="dateField" value="">
+                </div>
+                <div id="costContainer" data-role="fieldcontain">
+                    <label for="CostSlider">Total Fuel Cost in Euros:</label>
+                    <input type="range" name="CostSlider" id="CostSlider" data-highlight="true" min="5" max="100" step=".1" value="40">
+                </div>
+
+                <div id="submitDiv" data-role="fieldcontain">
+                    <input type="submit" value="Yeap, I just refueled my car!" data-inline="true">
+                </div>
+            </form>
+        </div>
+        <div data-role="footer">
+            <h4>My Footer</h4>
+        </div>
+        <!-- /footer -->
+        <script>
+            document.getElementById("dateField").valueAsDate = new Date();
+        </script>
+    </div>
+
+</body>
+</html>
