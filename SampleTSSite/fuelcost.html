@@ -80,7 +80,7 @@
                 $.ajaxSetup({
                     beforeSend: addAuthToken
                 });
-                $.get("http://localhost:38930/api/Refuels", function (data) {
+                $.get("http://troxos.azurewebsites.net/api/Refuels", function (data) {
                     document.getElementById('refuelData').innerHTML = json2html.transform(data, transform);
                     console.log(data);
                 });
@@ -89,7 +89,7 @@
 
                     $.ajax({
                         type: "POST",
-                        url: "http://localhost:38930/api/Refuels",
+                        url: "http://troxos.azurewebsites.net/api/Refuels",
                         cache: false,
                         data: formData,
                         success: onSuccess,
