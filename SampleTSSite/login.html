@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login Form</title>
+    <!--<link rel="stylesheet" href="stylesheets/themes/my-custom-theme.css" />
+    <link rel="stylesheet" href="stylesheets/themes/jquery.mobile.icons.min.css" />-->
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css">
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+
+    <!-- Favicons
+    ================================================== -->
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+</head>
+<body>
+    <div data-role="page" data-theme="b">
+        <div data-role="content" data-theme="a">
+            <div data-role="header">
+                <h1>Login Form: </h1>
+            </div>
+            <!-- /header -->
+            <form id="formMain">
+                <div id="emailContainer" data-role="fieldcontain">
+                    <label for="UserName">Email:</label>
+                    <input type="email" name="UserName" id="UserName" value="">
+                </div>
+                <div id="passContainer" data-role="fieldcontain">
+                    <label for="Password">Password:</label>
+                    <input type="password" name="Password" id="Password" value="" autocomplete="off">
+                </div>
+                <input type="hidden" name="grant_type" id="grant_type" value="password">
+                <div id="submitDiv" data-role="fieldcontain">
+                    <input type="submit" id="submit" value="Login!" data-inline="true" data-icon="check">
+                </div>
+            </form>
+        </div>
+        <div data-role="footer">
+            <h4>My Footer</h4>
+        </div>
+        <!-- /footer -->
+        <script>
+            function onSuccess(data, status) {
+                console.dir(data.access_token);
+                localStorage.clear();
+                localStorage.setItem('access_token', data.access_token);
+                window.location.href = "/fuelcost.html";
+            }
+
+            function onError(data, status) {
+                // handle an error
+                alert(data.responseText);
+            }
+
+            $(document).ready(function () {
+                $("#submit").click(function () {
+
+                    var formData = $("#formMain").serialize();
+
+                    $.ajax({
+                        type: "POST",
+                        url: "http://localhost:38930/Token",
+                        cache: false,
+                        data: formData,
+                        success: onSuccess,
+                        error: onError
+                    });
+
+                    return false;
+                });
+            });
+        </script>
+    </div>
+
+</body>
+</html>

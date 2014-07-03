@@ -18,6 +18,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="fuelcost.html" />
+    <Content Include="login.html" />
+    <Content Include="register.html" />
+    <Content Include="scripts\jquery.json2html.js" />
+    <Content Include="scripts\json2html.js" />
     <Content Include="stylesheets\app.css" />
     <Content Include="images\apple-touch-icon-114x114.png" />
     <Content Include="images\apple-touch-icon-72x72.png" />
