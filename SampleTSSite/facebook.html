@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    At first get all available providers
+
+    GET /api/Account/ExternalLogins?returnUrl=%2F&generateState=true
+    The response message is a list in json format
+
+    [{"name":"Facebook",
+    "url":"/api/Account/ExternalLogin?provider=Facebook&response_type=token&client_id=self&redirect_uri=http%3A%2F%2Flocalhost%3A15359%2F&state=QotufgXRptkAfJvcthIOWBnGZydgVkZWsx8YrQepeDk1",
+    "state":"QotufgXRptkAfJvcthIOWBnGZydgVkZWsx8YrQepeDk1"}]
+    Now send a GET request to the url of the provider you want to use. You will be redirected to the login page of the external provider. Fill in your credentials and the you will be redirected back to your site. Now parse the access_token from the url.
+
+    http://localhost:15359/#access_token=[..]&token_type=bearer&expires_in=[..]&state=QotufgXRptkAfJvcthIOWBnGZydgVkZWsx8YrQepeDk1
+    If the user already has a local account, the .AspNet.Cookies cookie is set and you are done. If not, only the .AspNet.ExternalCookie cookie is set and you have to register a local account.
+
+    There is an api to find out if the user is registered:
+
+    GET /api/Account/UserInfo
+    The response is
+
+    {"userName":"xxx","hasRegistered":false,"loginProvider":"Facebook"}
+    To create a local account for the user, call
+
+    POST /api/Account/RegisterExternal
+    Authorization: Bearer VPcd1RQ4X... (access_token from url)
+    Content-Type: application/json
+    {"UserName":"myusername"}
+    Now send the same request with the provider url as before
+
+    GET /api/Account/ExternalLogin?provider=Facebook&response_type=token&client_id=self&redirect_uri=http%3A%2F%2Flocalhost%3A15359%2F&state=QotufgXRptkAfJvcthIOWBnGZydgVkZWsx8YrQepeDk1
+    But this time the user already has an account and gets authenticated. You can verify this by calling /api/Account/UserInfo again.
+
+    Now extract the access_token from the url. You have to add the Authorization: Bearer [access_token] header to every request you make.
+</body>
+</html>
