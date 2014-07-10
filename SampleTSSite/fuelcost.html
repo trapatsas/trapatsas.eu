@@ -37,7 +37,7 @@
                 </div>
 
                 <div id="submitDiv" data-role="fieldcontain">
-                    <input type="submit" value="Yeap, I just refueled my car!" data-inline="true" data-icon="check">
+                    <input type="submit" data-theme="b" name="submit" id="submit" value="Yeap, I just refueled my car!" data-inline="true" data-icon="check">
                 </div>
             </form>
         </div>
@@ -80,16 +80,15 @@
                 $.ajaxSetup({
                     beforeSend: addAuthToken
                 });
-                $.get("http://troxos.azurewebsites.net/api/Refuels", function (data) {
+                $.get("http://localhost:38930/api/Refuels", function (data) {
                     document.getElementById('refuelData').innerHTML = json2html.transform(data, transform);
-                    console.log(data);
                 });
                 $("#submit").click(function () {
                     var formData = $("#formMain").serialize();
 
                     $.ajax({
                         type: "POST",
-                        url: "http://troxos.azurewebsites.net/api/Refuels",
+                        url: "http://localhost:38930/api/Refuels",
                         cache: false,
                         data: formData,
                         success: onSuccess,
