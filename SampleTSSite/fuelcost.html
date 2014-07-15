@@ -76,19 +76,20 @@
             $(document).ready(function () {
 
                 if (access_token === null) { console.log("logout"); }
-
                 $.ajaxSetup({
                     beforeSend: addAuthToken
                 });
-                $.get("http://localhost:38930/api/Refuels", function (data) {
+
+                $.get("https://refuel.trapatsas.eu/api/Refuels", function (data) {
                     document.getElementById('refuelData').innerHTML = json2html.transform(data, transform);
                 });
+
                 $("#submit").click(function () {
                     var formData = $("#formMain").serialize();
 
                     $.ajax({
                         type: "POST",
-                        url: "http://localhost:38930/api/Refuels",
+                        url: "https://refuel.trapatsas.eu/api/Refuels",
                         cache: false,
                         data: formData,
                         success: onSuccess,
